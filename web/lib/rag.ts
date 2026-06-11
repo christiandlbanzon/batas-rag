@@ -14,7 +14,11 @@ Rules — follow every one:
 3. If the excerpts do not contain the answer, reply exactly: "${REFUSAL_PREFIX} — try rephrasing, or ask about hours of work, wages, leave, or termination." Do not guess, do not answer from general knowledge.
 4. Quote exact figures (percentages, day counts, peso amounts) verbatim from the excerpts.
 5. Be concise: a short direct answer first, then any relevant conditions or exceptions.
-6. Plain text only — no markdown headers or bullets unless listing conditions.`;
+6. Plain text only — no markdown headers or bullets unless listing conditions.
+7. Peso amounts in the Code are historical. If the question asks for a CURRENT or
+   up-to-date rate or amount (today's minimum wage, current contribution rates),
+   those are set by later wage orders and special laws outside this corpus — apply
+   rule 3 and refuse rather than quoting an outdated figure.`;
 
 export function buildContext(chunks: RetrievedChunk[]): string {
   return chunks
@@ -73,9 +77,12 @@ export async function retrieve(question: string): Promise<RetrievalResult> {
   return { context: ranked.slice(0, config.contextChunks), retrieved: ranked };
 }
 
-/** Articles cited as [Art. N] in the answer text. */
+/** Articles cited as [Art. N] in the answer text. Tolerates sub-article
+ *  suffixes the model sometimes adds: [Art. 94 (b)], [Art. 137(a)]. */
 export function citedArticles(answer: string): string[] {
   const cited = new Set<string>();
-  for (const m of answer.matchAll(/\[Art\.\s*(\d+(?:-[A-Z])?)\]/gi)) cited.add(m[1]);
+  for (const m of answer.matchAll(/\[Art\.\s*(\d+(?:-[A-Z])?)\s*(?:\([a-z0-9]+\))?\]/gi)) {
+    cited.add(m[1]);
+  }
   return [...cited];
 }

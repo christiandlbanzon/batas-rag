@@ -34,6 +34,12 @@ keyword arm took FTS-only hit@8 from **0.075 → 0.600** (AND semantics matched 
 nothing), and widening the fusion candidate pool 20 → 40 *hurt* (0.975 → 0.850 —
 weak keyword matches flood the fusion), so the pool stays at 20.
 
+Answer-mode evals (through the live `/api/ask`) already paid for themselves on a
+partial run: the traps caught the model answering "current minimum wage?" with a
+historical 1993 wage table instead of refusing — now guarded in the system prompt —
+and exposed a citation-extraction bug for sub-article cites like `[Art. 94 (b)]`.
+Full answer metrics land after the next free-tier quota window.
+
 ## Architecture
 
 ```mermaid
