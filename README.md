@@ -1,23 +1,23 @@
-﻿# Batas â€” Philippine Labor Code Q&A with receipts
+# Batas — Philippine Labor Code Q&A with receipts
 
 [![evals](https://github.com/christiandlbanzon/batas-rag/actions/workflows/evals.yml/badge.svg)](https://github.com/christiandlbanzon/batas-rag/actions/workflows/evals.yml)
 
 Ask questions about the Philippine Labor Code and get answers grounded in the exact
-articles â€” every claim cited as `[Art. N]`, every source inspectable, and a committed
+articles — every claim cited as `[Art. N]`, every source inspectable, and a committed
 eval harness that proves retrieval accuracy with numbers instead of vibes.
 Runs entirely on free tiers: **$0/month**.
 
-<!-- TODO(owner): record a 60â€“90s GIF of the demo and embed it here -->
+<!-- TODO(owner): record a 60–90s GIF of the demo and embed it here -->
 <!-- ![demo](docs/demo.gif) -->
 
-**Live demo:** _pending first Vercel deploy â€” see [Deploying](#deploying)_
+**Live demo:** _pending first Vercel deploy — see [Deploying](#deploying)_
 
-> Educational demo â€” **not legal advice**.
+> Educational demo — **not legal advice**.
 
 ## Eval results
 
 50-question golden set: 20 direct, 20 colloquial paraphrases, 10 out-of-corpus traps
-that must produce refusals. Reports live in [`evals/results/`](evals/results/) â€” the
+that must produce refusals. Reports live in [`evals/results/`](evals/results/) — the
 commit history doubles as the tuning changelog.
 
 | Metric | Value |
@@ -28,17 +28,17 @@ commit history doubles as the tuning changelog.
 | MRR@8 | 0.693 |
 
 Direct questions hit 100% @8; colloquial paraphrases 95% (the one miss: "free meals
-removed" â†’ the non-diminution rule, a genuine vocabulary gap â€” the gold article never
+removed" → the non-diminution rule, a genuine vocabulary gap — the gold article never
 mentions meals). Two measured tuning results along the way: OR-joined lexemes in the
-keyword arm took FTS-only hit@8 from **0.075 â†’ 0.600** (AND semantics matched almost
-nothing), and widening the fusion candidate pool 20 â†’ 40 *hurt* (0.975 â†’ 0.850 â€”
+keyword arm took FTS-only hit@8 from **0.075 → 0.600** (AND semantics matched almost
+nothing), and widening the fusion candidate pool 20 → 40 *hurt* (0.975 → 0.850 —
 weak keyword matches flood the fusion), so the pool stays at 20.
 
 ## Architecture
 
 ```mermaid
 flowchart LR
-    subgraph offline [Python pipeline â€” runs once]
+    subgraph offline [Python pipeline — runs once]
         PDF[DOLE PD 442 PDF<br/>2022 renumbered ed.] --> ING[ingest.py<br/>font-aware parse] --> CHK[chunk.py<br/>article-aware chunks] --> EMB[embed.py<br/>idempotent upsert]
     end
     subgraph supabase [Supabase free tier]
@@ -61,49 +61,50 @@ flowchart LR
 in 2015 (DOLE Department Advisory 01-2015); anything citing "Art. 287 Retirement" is
 pre-renumbering. The only official text carrying both numberings is the DOLE PDF, so
 the pipeline parses that instead of the cleaner-looking 1974 HTML on the Official
-Gazette â€” and keeps the old numbers as metadata (`Art. 302 [287]`). The PDF
+Gazette — and keeps the old numbers as metadata (`Art. 302 [287]`). The PDF
 interleaves footnotes with body text in reading order; fonts separate them (body
 9.5pt, footnotes 5.5pt, markers superscript-flagged), so extraction filters by font
 before any regex runs.
 
 **Why article-aware chunking.** Legal retrieval has a natural unit: the article. A
 chunk never spans two articles, so a citation can never be half-right. Each chunk
-carries a breadcrumb header (`Book Three > Title I > Art. 87 (Overtime Work)`) â€”
+carries a breadcrumb header (`Book Three > Title I > Art. 87 (Overtime Work)`) —
 cheap context that helps both the embedding and the keyword index.
 
 **Why hybrid search, and what the evals changed.** Statute language and colloquial
-language barely overlap ("graveyard shift" vs "night shift differential") â€” vectors
+language barely overlap ("graveyard shift" vs "night shift differential") — vectors
 handle that; exact terms ("service incentive leave") favor keywords. Both arms run as
 one Postgres RPC fused with Reciprocal Rank Fusion. The golden set caught that
 Postgres's `websearch_to_tsquery` ANDs every word, matching almost nothing for
-natural-language questions: OR-joined lexemes raised FTS-only hit@8 8Ã—. Top-k is
-deduped to the best chunk per article â€” duplicates were crowding out distinct
+natural-language questions: OR-joined lexemes raised FTS-only hit@8 8×. Top-k is
+deduped to the best chunk per article — duplicates were crowding out distinct
 articles.
 
 **Why the eval harness is the feature.** A RAG demo without numbers is a chatbot.
-The golden set gates every retrieval change in CI (one batched embedding call â€” free
+The golden set gates every retrieval change in CI (one batched embedding call — free
 tier safe), and answer-mode evals run through the real `/api/ask` path measuring
 citation presence and trap refusals. Reports are committed, so tuning history is
 auditable in git.
 
 **Why no LangChain.** The whole retrieval path is ~40 lines of SQL and two REST
-calls. Building on the APIs directly keeps every step debuggable and provable â€”
+calls. Building on the APIs directly keeps every step debuggable and provable —
 there's nothing a framework would abstract here except the understanding.
 
 **How $0/month shaped the design.** Python serving was ruled out (free Python hosting
-cold-starts badly) â€” the pipeline is Python, serving is Next.js API routes on Vercel.
+cold-starts badly) — the pipeline is Python, serving is Next.js API routes on Vercel.
 The per-IP rate limiter (hashed IPs, one Postgres count query) exists so a single
 visitor can't drain the Gemini free quota. Embeddings are hash-keyed and idempotent
 so re-runs cost zero API calls. The reranker is a flag (`RERANK_ENABLED`) that fails
-open when quota is tight.
+open when quota is tight. The eval harness paces answer-mode runs (25s between
+questions) because an unpaced run blows the free-tier requests-per-minute cap.
 
 ## Repo layout
 
 ```
-pipeline/   ingest.py â†’ chunk.py â†’ embed.py  (Python 3.12, pydantic)
+pipeline/   ingest.py → chunk.py → embed.py  (Python 3.12, pydantic)
 evals/      golden_set.jsonl, run_evals.py, results/ (committed reports)
-web/        Next.js app â€” chat UI + /api/ask + /api/feedback
-supabase/   schema.sql â€” tables, HNSW + GIN indexes, hybrid_search RPC
+web/        Next.js app — chat UI + /api/ask + /api/feedback
+supabase/   schema.sql — tables, HNSW + GIN indexes, hybrid_search RPC
 ```
 
 ## Local setup
@@ -115,7 +116,7 @@ pgvector (Supabase free project, or locally:
 ```bash
 cp .env.example .env        # fill in keys (see comments in the file)
 make setup                  # venv + deps
-make pipeline               # ingest â†’ chunk â†’ embed (idempotent)
+make pipeline               # ingest → chunk → embed (idempotent)
 make evals                  # retrieval metrics on the golden set
 cd web && npm install && npm run dev
 ```
@@ -136,9 +137,9 @@ placeholder vectors (and eval runs take `--fake`), clearly labeled in reports.
 ## Deploying
 
 1. **Supabase** (free): create a project, paste `supabase/schema.sql` into the SQL
-   editor. Grab the URL + service-role key (Settings â†’ API) and the connection-pooler
-   URI (Settings â†’ Database) for `DATABASE_URL`.
-2. **Google AI Studio** (free): create an API key â†’ `GEMINI_API_KEY`.
+   editor. Grab the URL + service-role key (Settings → API) and the connection-pooler
+   URI (Settings → Database) for `DATABASE_URL`.
+2. **Google AI Studio** (free): create an API key → `GEMINI_API_KEY`.
 3. Run the pipeline once (`make pipeline`) to populate the index.
 4. **Vercel** (Hobby): import the repo, set root directory to `web/`, add env vars
    `GEMINI_API_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `IP_HASH_SALT`.
@@ -148,4 +149,3 @@ placeholder vectors (and eval runs take `--fake`), clearly labeled in reports.
 ## License
 
 [MIT](LICENSE). The Labor Code text is a public-domain government work.
-
