@@ -37,11 +37,19 @@ from models import Article, Chunk
 ROOT = Path(__file__).parent
 OUTPUT = ROOT / "output"
 
-EMBED_MODEL = "models/text-embedding-004"
+# text-embedding-004 was retired mid-2026; gemini-embedding-001 natively
+# outputs 3072 dims but supports MRL truncation. We request 768 to fit the
+# schema (and pgvector's HNSW 2000-dim index ceiling) and re-normalize
+# client-side, as Google recommends for truncated outputs.
+EMBED_MODEL = "models/gemini-embedding-001"
 EMBED_DIM = 768
-BATCH_SIZE = 100
-BATCH_PAUSE_S = 1.0
-MAX_RETRIES = 5
+# Free-tier limits on gemini-embedding-001 are tight (rolling per-minute
+# token budget): 100-chunk batches 429 even after backoff. 20 chunks per
+# request with a pause stays comfortably inside it.
+BATCH_SIZE = int(os.environ.get("EMBED_BATCH_SIZE", 20))
+BATCH_PAUSE_S = float(os.environ.get("EMBED_BATCH_PAUSE_S", 15))
+MAX_RETRIES = 6
+RETRY_BASE_DELAY_S = 5.0
 
 
 def load_env() -> None:
@@ -78,23 +86,30 @@ def gemini_embed_batch(
                 "model": EMBED_MODEL,
                 "content": {"parts": [{"text": t}]},
                 "taskType": task_type,
+                "outputDimensionality": EMBED_DIM,
             }
             for t in texts
         ]
     }
-    delay = 2.0
+    delay = RETRY_BASE_DELAY_S
     for attempt in range(MAX_RETRIES):
         resp = requests.post(url, json=payload, params={"key": api_key}, timeout=120)
         if resp.status_code == 200:
-            return [e["values"] for e in resp.json()["embeddings"]]
+            return [normalize_vec(e["values"]) for e in resp.json()["embeddings"]]
         if resp.status_code in (429, 500, 502, 503, 504):
             print(f"  HTTP {resp.status_code}, retrying in {delay:.0f}s "
                   f"(attempt {attempt + 1}/{MAX_RETRIES})")
             time.sleep(delay)
-            delay *= 2
+            delay = min(delay * 2, 120)
             continue
         raise RuntimeError(f"Gemini embed failed: {resp.status_code} {resp.text[:300]}")
     raise RuntimeError("Gemini embed: retries exhausted")
+
+
+def normalize_vec(values: list[float]) -> list[float]:
+    """L2-normalize: MRL-truncated embeddings are not unit vectors."""
+    norm = math.sqrt(sum(v * v for v in values)) or 1.0
+    return [v / norm for v in values]
 
 
 def to_pgvector(values: list[float]) -> str:
@@ -176,6 +191,7 @@ def main() -> None:
                         (ids[c.article_no], c.chunk_index, c.content, c.content_hash,
                          to_pgvector(vec)),
                     )
+            conn.commit()  # durable per batch — a crash never loses progress
             embedded += len(batch)
             print(f"  embedded {embedded}/{len(todo)}")
 

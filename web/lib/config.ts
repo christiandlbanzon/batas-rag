@@ -27,7 +27,10 @@ export const config = {
     return (process.env.RERANK_ENABLED ?? "true") !== "false";
   },
   chatModel: process.env.GEMINI_CHAT_MODEL ?? "gemini-2.5-flash",
-  embedModel: "text-embedding-004",
+  // 768-dim MRL truncation of gemini-embedding-001 — must match the corpus
+  // side (pipeline/embed.py) and the vector(768) column.
+  embedModel: "gemini-embedding-001",
+  embedDim: 768,
   /** Chunks fed to the generator after fusion/rerank (context cap). */
   contextChunks: 5,
   /** Chunks returned from hybrid search before reranking. */

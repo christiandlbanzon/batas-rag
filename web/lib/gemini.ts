@@ -28,9 +28,13 @@ export async function embedQuery(text: string): Promise<number[]> {
   const resp = await geminiFetch(`models/${config.embedModel}:embedContent`, {
     content: { parts: [{ text }] },
     taskType: "RETRIEVAL_QUERY",
+    outputDimensionality: config.embedDim,
   });
   const json = await resp.json();
-  return json.embedding.values as number[];
+  const values = json.embedding.values as number[];
+  // MRL-truncated embeddings are not unit vectors — re-normalize.
+  const norm = Math.sqrt(values.reduce((s, v) => s + v * v, 0)) || 1;
+  return values.map((v) => v / norm);
 }
 
 export interface GenerateOptions {

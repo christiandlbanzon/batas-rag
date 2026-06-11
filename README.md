@@ -22,14 +22,17 @@ commit history doubles as the tuning changelog.
 
 | Metric | Value |
 | --- | --- |
-| hit@8 | _pending real-embedding baseline_ |
-| MRR@8 | _pending real-embedding baseline_ |
-| Trap refusal rate | _pending_ |
+| hit@1 | 0.575 |
+| hit@4 | 0.825 |
+| **hit@8** | **0.975** |
+| MRR@8 | 0.693 |
 
-Current committed runs are harness self-tests with placeholder vectors (the corpus
-hasn't been embedded with a real key yet). One measured win already in: switching the
-keyword arm from `websearch_to_tsquery` (AND) to OR-joined lexemes took FTS-only
-hit@8 from **0.075 → 0.600** on the golden set.
+Direct questions hit 100% @8; colloquial paraphrases 95% (the one miss: "free meals
+removed" → the non-diminution rule, a genuine vocabulary gap — the gold article never
+mentions meals). Two measured tuning results along the way: OR-joined lexemes in the
+keyword arm took FTS-only hit@8 from **0.075 → 0.600** (AND semantics matched almost
+nothing), and widening the fusion candidate pool 20 → 40 *hurt* (0.975 → 0.850 —
+weak keyword matches flood the fusion), so the pool stays at 20.
 
 ## Architecture
 

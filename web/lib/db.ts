@@ -3,6 +3,14 @@
 
 import { config } from "./config";
 
+// Supabase serves PostgREST under /rest/v1; a bare local PostgREST serves at
+// the root. Override with SUPABASE_REST_PREFIX="" for local dev.
+const REST_PREFIX = process.env.SUPABASE_REST_PREFIX ?? "/rest/v1";
+
+function restUrl(path: string): string {
+  return `${config.supabaseUrl}${REST_PREFIX}${path}`;
+}
+
 function headers(extra: Record<string, string> = {}): Record<string, string> {
   return {
     apikey: config.supabaseServiceKey,
@@ -29,7 +37,7 @@ export async function hybridSearch(
   queryEmbedding: number[],
   matchCount: number,
 ): Promise<RetrievedChunk[]> {
-  const resp = await fetch(`${config.supabaseUrl}/rest/v1/rpc/hybrid_search`, {
+  const resp = await fetch(restUrl("/rpc/hybrid_search"), {
     method: "POST",
     headers: headers(),
     body: JSON.stringify({
@@ -46,7 +54,7 @@ export async function hybridSearch(
 export async function recentQueryCount(ipHash: string): Promise<number> {
   const since = new Date(Date.now() - 60 * 60 * 1000).toISOString();
   const url =
-    `${config.supabaseUrl}/rest/v1/query_log` +
+    restUrl("/query_log") +
     `?ip_hash=eq.${encodeURIComponent(ipHash)}&created_at=gte.${encodeURIComponent(since)}&select=id`;
   const resp = await fetch(url, {
     method: "HEAD",
@@ -58,7 +66,7 @@ export async function recentQueryCount(ipHash: string): Promise<number> {
 }
 
 export async function logQuery(ipHash: string, question: string): Promise<void> {
-  const resp = await fetch(`${config.supabaseUrl}/rest/v1/query_log`, {
+  const resp = await fetch(restUrl("/query_log"), {
     method: "POST",
     headers: headers({ Prefer: "return=minimal" }),
     body: JSON.stringify({ ip_hash: ipHash, question }),
@@ -71,7 +79,7 @@ export async function insertFeedback(
   answer: string,
   rating: 1 | -1,
 ): Promise<void> {
-  const resp = await fetch(`${config.supabaseUrl}/rest/v1/feedback`, {
+  const resp = await fetch(restUrl("/feedback"), {
     method: "POST",
     headers: headers({ Prefer: "return=minimal" }),
     body: JSON.stringify({ question, answer, rating }),
