@@ -1,0 +1,50 @@
+{"id": "d01", "question": "How is overtime pay computed for work beyond eight hours?", "expected_article": "87", "kind": "direct", "notes": "Art. 87 Overtime Work: +25% of regular wage; +30% on holiday/rest day"}
+{"id": "d02", "question": "How many days of service incentive leave is an employee entitled to each year?", "expected_article": "95", "kind": "direct", "notes": "Art. 95: 5 days with pay after one year of service"}
+{"id": "d03", "question": "What is the night shift differential rate and what hours does it cover?", "expected_article": "86", "kind": "direct", "notes": "Art. 86: not less than 10% per hour, 10pm-6am"}
+{"id": "d04", "question": "What are the normal hours of work per day under the Labor Code?", "expected_article": "83", "kind": "direct", "notes": "Art. 83: shall not exceed 8 hours"}
+{"id": "d05", "question": "How long a meal period must employers give employees?", "expected_article": "85", "kind": "direct", "notes": "Art. 85: not less than 60 minutes time-off for regular meals"}
+{"id": "d06", "question": "How many consecutive hours is the weekly rest period required by law?", "expected_article": "91", "kind": "direct", "notes": "Art. 91: not less than 24 consecutive hours after every 6 consecutive normal work days"}
+{"id": "d07", "question": "How much is an employee paid for working on a regular holiday?", "expected_article": "94", "kind": "direct", "notes": "Art. 94: twice the regular rate for work on a regular holiday"}
+{"id": "d08", "question": "What additional compensation is due for work performed on a scheduled rest day?", "expected_article": "93", "kind": "direct", "notes": "Art. 93: +30% of regular wage"}
+{"id": "d09", "question": "Under what circumstances may an employer require work on a rest day?", "expected_article": "92", "kind": "direct", "notes": "Art. 92: emergencies, urgent work, etc."}
+{"id": "d10", "question": "What is the minimum employable age under the Labor Code?", "expected_article": "137", "kind": "direct", "notes": "Art. 137 [139]: no child below 15 except under direct parental responsibility"}
+{"id": "d11", "question": "What are the just causes for which an employer may terminate an employee?", "expected_article": "297", "kind": "direct", "notes": "Art. 297 [282]: serious misconduct, willful disobedience, gross neglect, fraud, crime, analogous"}
+{"id": "d12", "question": "What separation pay is owed when a company closes or reduces personnel?", "expected_article": "298", "kind": "direct", "notes": "Art. 298 [283]: authorized causes; 1 month or 1/2 month per year of service depending on cause"}
+{"id": "d13", "question": "What are the optional and compulsory retirement ages and the minimum retirement pay?", "expected_article": "302", "kind": "direct", "notes": "Art. 302 [287]: optional 60, compulsory 65; at least 1/2 month salary per year of service"}
+{"id": "d14", "question": "What does security of tenure mean for regular employees?", "expected_article": "294", "kind": "direct", "notes": "Art. 294 [279]: no termination except for just cause or authorized cause"}
+{"id": "d15", "question": "How long may probationary employment last?", "expected_article": "296", "kind": "direct", "notes": "Art. 296 [281]: shall not exceed 6 months from start, unless apprenticeship requires longer"}
+{"id": "d16", "question": "When is an employee considered a regular employee rather than a casual employee?", "expected_article": "295", "kind": "direct", "notes": "Art. 295 [280]: activities usually necessary or desirable in the usual business"}
+{"id": "d17", "question": "How often must wages be paid to employees?", "expected_article": "103", "kind": "direct", "notes": "Art. 103: at least once every 2 weeks or twice a month at intervals not exceeding 16 days"}
+{"id": "d18", "question": "What deductions from an employee's wages are allowed?", "expected_article": "113", "kind": "direct", "notes": "Art. 113: insurance premiums with consent, union dues, authorized by law/DOLE"}
+{"id": "d19", "question": "What is the prohibition against elimination or diminution of benefits?", "expected_article": "100", "kind": "direct", "notes": "Art. 100: supplements/benefits being enjoyed cannot be eliminated or diminished"}
+{"id": "d20", "question": "How much notice must an employee give to resign without just cause?", "expected_article": "300", "kind": "direct", "notes": "Art. 300 [285]: written notice at least one month in advance"}
+{"id": "p01", "question": "My boss makes me work Sundays. What extra pay am I owed for that?", "expected_article": "93", "kind": "paraphrase", "notes": "rest day/Sunday premium -> Art. 93"}
+{"id": "p02", "question": "I worked 11 hours yesterday. How much extra should I get for those 3 hours?", "expected_article": "87", "kind": "paraphrase", "notes": "overtime -> Art. 87"}
+{"id": "p03", "question": "Do I get paid more for working the graveyard shift?", "expected_article": "86", "kind": "paraphrase", "notes": "night shift differential -> Art. 86"}
+{"id": "p04", "question": "I've been with my company for over a year. Do I get any paid leave days?", "expected_article": "95", "kind": "paraphrase", "notes": "service incentive leave -> Art. 95"}
+{"id": "p05", "question": "Can my employer fire me without any reason at all?", "expected_article": "294", "kind": "paraphrase", "notes": "security of tenure -> Art. 294 [279]"}
+{"id": "p06", "question": "What kinds of behavior can get someone legally fired in the Philippines?", "expected_article": "297", "kind": "paraphrase", "notes": "just causes -> Art. 297 [282]"}
+{"id": "p07", "question": "My company is downsizing and letting people go. Are we entitled to separation pay?", "expected_article": "298", "kind": "paraphrase", "notes": "retrenchment -> Art. 298 [283]"}
+{"id": "p08", "question": "How old does someone have to be before they can legally work?", "expected_article": "137", "kind": "paraphrase", "notes": "minimum employable age -> Art. 137 [139]"}
+{"id": "p09", "question": "Is my one-hour lunch break supposed to be part of my paid hours?", "expected_article": "85", "kind": "paraphrase", "notes": "meal periods -> Art. 85"}
+{"id": "p10", "question": "Can they make me work seven days straight with no day off?", "expected_article": "91", "kind": "paraphrase", "notes": "weekly rest day -> Art. 91"}
+{"id": "p11", "question": "I'm turning 60 soon. Can I retire and get retirement pay from my company?", "expected_article": "302", "kind": "paraphrase", "notes": "retirement -> Art. 302 [287]"}
+{"id": "p12", "question": "I'm still on probation at my new job. How long can they keep me like this?", "expected_article": "296", "kind": "paraphrase", "notes": "probationary employment -> Art. 296 [281]"}
+{"id": "p13", "question": "My employer wants to pay part of my salary in vouchers instead of cash. Is that legal?", "expected_article": "102", "kind": "paraphrase", "notes": "forms of payment -> Art. 102"}
+{"id": "p14", "question": "Can my boss take money out of my paycheck to cover losses in the store?", "expected_article": "113", "kind": "paraphrase", "notes": "wage deduction -> Art. 113"}
+{"id": "p15", "question": "Management just removed the free meals we've had for years. Can they do that?", "expected_article": "100", "kind": "paraphrase", "notes": "non-diminution of benefits -> Art. 100"}
+{"id": "p16", "question": "I want to quit my job. How much notice do I have to give my employer?", "expected_article": "300", "kind": "paraphrase", "notes": "termination by employee -> Art. 300 [285]"}
+{"id": "p17", "question": "Can a company require women employees to stay single to keep their jobs?", "expected_article": "134", "kind": "paraphrase", "notes": "stipulation against marriage -> Art. 134 [136]"}
+{"id": "p18", "question": "I'm pregnant. What does the Labor Code say about my leave?", "expected_article": "131", "kind": "paraphrase", "notes": "maternity leave -> Art. 131 [133] (RA 11210 supersedes, but in-corpus gold)"}
+{"id": "p19", "question": "Can government employees join unions?", "expected_article": "254", "kind": "paraphrase", "notes": "right of employees in the public service -> Art. 254 [244]"}
+{"id": "p20", "question": "What does a union need to do before it can legally go on strike?", "expected_article": "278", "kind": "paraphrase", "notes": "strikes/picketing/lockouts requirements -> Art. 278 [263]"}
+{"id": "t01", "question": "What is the capital gains tax rate in the Philippines?", "expected_article": null, "kind": "trap", "notes": "tax law (NIRC), out of corpus -> must refuse"}
+{"id": "t02", "question": "How many days of paternity leave do new fathers get?", "expected_article": null, "kind": "trap", "notes": "RA 8187, not in the Labor Code -> must refuse"}
+{"id": "t03", "question": "How do I compute 13th month pay?", "expected_article": null, "kind": "trap", "notes": "PD 851, not in the Labor Code -> must refuse"}
+{"id": "t04", "question": "What is the current SSS monthly contribution rate?", "expected_article": null, "kind": "trap", "notes": "RA 11199 (Social Security Act) -> must refuse"}
+{"id": "t05", "question": "How much is the minimum wage in Metro Manila right now?", "expected_article": null, "kind": "trap", "notes": "current rates come from wage orders, not the Code -> must refuse"}
+{"id": "t06", "question": "What does the Data Privacy Act require employers to do with employee records?", "expected_article": null, "kind": "trap", "notes": "RA 10173 -> must refuse"}
+{"id": "t07", "question": "How do I file for annulment of my marriage?", "expected_article": null, "kind": "trap", "notes": "Family Code -> must refuse"}
+{"id": "t08", "question": "How many days of special leave does the Magna Carta of Women grant after surgery?", "expected_article": null, "kind": "trap", "notes": "RA 9710 -> must refuse"}
+{"id": "t09", "question": "What are an employer's obligations under the Telecommuting Act?", "expected_article": null, "kind": "trap", "notes": "RA 11165 -> must refuse"}
+{"id": "t10", "question": "What is the penalty for driving under the influence of alcohol?", "expected_article": null, "kind": "trap", "notes": "RA 10586 -> must refuse"}

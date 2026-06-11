@@ -68,14 +68,16 @@ def fake_embedding(content_hash: str) -> list[float]:
     return [v / norm for v in values]
 
 
-def gemini_embed_batch(texts: list[str], api_key: str) -> list[list[float]]:
+def gemini_embed_batch(
+    texts: list[str], api_key: str, task_type: str = "RETRIEVAL_DOCUMENT"
+) -> list[list[float]]:
     url = f"https://generativelanguage.googleapis.com/v1beta/{EMBED_MODEL}:batchEmbedContents"
     payload = {
         "requests": [
             {
                 "model": EMBED_MODEL,
                 "content": {"parts": [{"text": t}]},
-                "taskType": "RETRIEVAL_DOCUMENT",
+                "taskType": task_type,
             }
             for t in texts
         ]

@@ -97,12 +97,20 @@ with semantic as (
   order by c.embedding <=> query_embedding
   limit pool_size
 ),
+-- OR-joined lexemes instead of websearch_to_tsquery: AND semantics match
+-- almost nothing for long natural-language questions (FTS-only hit@8 on the
+-- golden set: 0.075 AND vs 0.600 OR). ts_rank_cd still ranks chunks that
+-- match more terms higher.
+query_terms as (
+  select to_tsquery('english', string_agg(lexeme, ' | ')) as tsq
+  from unnest(to_tsvector('english', query_text)) as t(lexeme, positions, weights)
+),
 keyword as (
   select c.id,
-         row_number() over (order by ts_rank_cd(c.tsv, websearch_to_tsquery('english', query_text)) desc) as rank
-  from chunks c
-  where c.tsv @@ websearch_to_tsquery('english', query_text)
-  order by ts_rank_cd(c.tsv, websearch_to_tsquery('english', query_text)) desc
+         row_number() over (order by ts_rank_cd(c.tsv, q.tsq) desc) as rank
+  from chunks c, query_terms q
+  where c.tsv @@ q.tsq
+  order by ts_rank_cd(c.tsv, q.tsq) desc
   limit pool_size
 ),
 fused as (
@@ -112,6 +120,14 @@ fused as (
          coalesce(full_text_weight / (rrf_k + k.rank), 0) as rrf_score
   from semantic s
   full outer join keyword k on s.id = k.id
+),
+-- One slot per article (its best chunk): duplicate chunks of one long
+-- article were crowding distinct articles out of the top-k.
+deduped as (
+  select distinct on (c.article_id) f.id, f.similarity, f.rrf_score
+  from fused f
+  join chunks c on c.id = f.id
+  order by c.article_id, f.rrf_score desc
 )
 select c.id          as chunk_id,
        a.id          as article_id,
@@ -122,7 +138,7 @@ select c.id          as chunk_id,
        c.content,
        f.similarity,
        f.rrf_score
-from fused f
+from deduped f
 join chunks c   on c.id = f.id
 join articles a on a.id = c.article_id
 order by f.rrf_score desc
