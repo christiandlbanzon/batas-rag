@@ -27,6 +27,7 @@ import json
 import statistics
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 ROOT = Path(__file__).parent
@@ -105,10 +106,17 @@ def run_retrieval(
     return {"metrics": metrics, "hit@8_by_kind": by_kind, "per_case": per_case}
 
 
-def run_answers(cases: list[EvalCase], api_url: str) -> dict:
-    """Hit the real /api/ask serving path; measure citations + refusals."""
+def run_answers(cases: list[EvalCase], api_url: str, pause_s: float = 0.0) -> dict:
+    """Hit the real /api/ask serving path; measure citations + refusals.
+
+    pause_s spaces out requests: each question costs 2 Gemini Flash calls
+    (rerank + generate), and the free tier allows ~10/min — an unpaced run
+    429s most of the set.
+    """
     per_case = []
-    for case in cases:
+    for i, case in enumerate(cases):
+        if i and pause_s:
+            time.sleep(pause_s)
         resp = requests.post(
             f"{api_url.rstrip('/')}/api/ask",
             json={"question": case.question, "stream": False},
@@ -233,6 +241,8 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--mode", choices=["retrieval", "full"], default="retrieval")
     parser.add_argument("--api-url", default="http://localhost:3000")
+    parser.add_argument("--pause-s", type=float, default=25.0,
+                        help="seconds between /api/ask calls in full mode (free-tier RPM)")
     parser.add_argument("--label", default="")
     parser.add_argument("--fake", action="store_true", help="fake embeddings (harness self-test)")
     parser.add_argument("--min-hit8", type=float, default=None, help="exit 1 if hit@8 below this")
@@ -256,7 +266,7 @@ def main() -> None:
         "retrieval": run_retrieval(cases, embeddings, db_url),
     }
     if args.mode == "full":
-        result["answers"] = run_answers(cases, args.api_url)
+        result["answers"] = run_answers(cases, args.api_url, args.pause_s)
 
     md = write_report(result, args.label, args.fake)
     print(f"report: {md}")

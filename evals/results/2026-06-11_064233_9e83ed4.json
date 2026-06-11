@@ -1,0 +1,1099 @@
+{
+ "label": "full answer-mode eval through live /api/ask (local stack)",
+ "fake": false,
+ "retrieval": {
+  "metrics": {
+   "hit@1": 0.575,
+   "hit@4": 0.825,
+   "hit@8": 0.975,
+   "mrr@8": 0.686
+  },
+  "hit@8_by_kind": {
+   "direct": 1.0,
+   "paraphrase": 0.95
+  },
+  "per_case": [
+   {
+    "id": "d01",
+    "kind": "direct",
+    "expected": "87",
+    "returned": [
+     "87",
+     "83",
+     "89",
+     "93",
+     "84",
+     "124",
+     "88",
+     "92"
+    ],
+    "rank": 1
+   },
+   {
+    "id": "d02",
+    "kind": "direct",
+    "expected": "95",
+    "returned": [
+     "95",
+     "302",
+     "173",
+     "131",
+     "15",
+     "219",
+     "91",
+     "205"
+    ],
+    "rank": 1
+   },
+   {
+    "id": "d03",
+    "kind": "direct",
+    "expected": "86",
+    "returned": [
+     "86",
+     "154",
+     "124",
+     "83",
+     "158",
+     "87",
+     "161",
+     "157"
+    ],
+    "rank": 1
+   },
+   {
+    "id": "d04",
+    "kind": "direct",
+    "expected": "83",
+    "returned": [
+     "83",
+     "87",
+     "93",
+     "224",
+     "92",
+     "219",
+     "91",
+     "128"
+    ],
+    "rank": 1
+   },
+   {
+    "id": "d05",
+    "kind": "direct",
+    "expected": "85",
+    "returned": [
+     "85",
+     "219",
+     "91",
+     "128",
+     "84",
+     "15",
+     "211",
+     "83"
+    ],
+    "rank": 1
+   },
+   {
+    "id": "d06",
+    "kind": "direct",
+    "expected": "91",
+    "returned": [
+     "91",
+     "83",
+     "84",
+     "92",
+     "87",
+     "93",
+     "158",
+     "154"
+    ],
+    "rank": 1
+   },
+   {
+    "id": "d07",
+    "kind": "direct",
+    "expected": "94",
+    "returned": [
+     "93",
+     "94",
+     "92",
+     "89",
+     "87",
+     "295",
+     "219",
+     "97"
+    ],
+    "rank": 2
+   },
+   {
+    "id": "d08",
+    "kind": "direct",
+    "expected": "93",
+    "returned": [
+     "93",
+     "87",
+     "92",
+     "91",
+     "83",
+     "88",
+     "89",
+     "94"
+    ],
+    "rank": 1
+   },
+   {
+    "id": "d09",
+    "kind": "direct",
+    "expected": "92",
+    "returned": [
+     "92",
+     "93",
+     "91",
+     "89",
+     "87",
+     "83",
+     "278",
+     "128"
+    ],
+    "rank": 1
+   },
+   {
+    "id": "d10",
+    "kind": "direct",
+    "expected": "137",
+    "returned": [
+     "137",
+     "15",
+     "219",
+     "59",
+     "128",
+     "144",
+     "292",
+     "302"
+    ],
+    "rank": 1
+   },
+   {
+    "id": "d11",
+    "kind": "direct",
+    "expected": "297",
+    "returned": [
+     "300",
+     "297",
+     "292",
+     "295",
+     "279",
+     "92",
+     "294",
+     "219"
+    ],
+    "rank": 2
+   },
+   {
+    "id": "d12",
+    "kind": "direct",
+    "expected": "298",
+    "returned": [
+     "298",
+     "302",
+     "224",
+     "129",
+     "83",
+     "299",
+     "200",
+     "294"
+    ],
+    "rank": 1
+   },
+   {
+    "id": "d13",
+    "kind": "direct",
+    "expected": "302",
+    "returned": [
+     "302",
+     "174",
+     "124",
+     "137",
+     "223",
+     "298",
+     "141",
+     "99"
+    ],
+    "rank": 1
+   },
+   {
+    "id": "d14",
+    "kind": "direct",
+    "expected": "294",
+    "returned": [
+     "295",
+     "292",
+     "300",
+     "219",
+     "294",
+     "13",
+     "173",
+     "296"
+    ],
+    "rank": 5
+   },
+   {
+    "id": "d15",
+    "kind": "direct",
+    "expected": "296",
+    "returned": [
+     "292",
+     "295",
+     "300",
+     "128",
+     "296",
+     "219",
+     "278",
+     "75"
+    ],
+    "rank": 5
+   },
+   {
+    "id": "d16",
+    "kind": "direct",
+    "expected": "295",
+    "returned": [
+     "295",
+     "106",
+     "75",
+     "300",
+     "219",
+     "296",
+     "15",
+     "294"
+    ],
+    "rank": 1
+   },
+   {
+    "id": "d17",
+    "kind": "direct",
+    "expected": "103",
+    "returned": [
+     "105",
+     "97",
+     "103",
+     "124",
+     "129",
+     "106",
+     "80",
+     "113"
+    ],
+    "rank": 3
+   },
+   {
+    "id": "d18",
+    "kind": "direct",
+    "expected": "113",
+    "returned": [
+     "113",
+     "97",
+     "105",
+     "129",
+     "106",
+     "124",
+     "117",
+     "121"
+    ],
+    "rank": 1
+   },
+   {
+    "id": "d19",
+    "kind": "direct",
+    "expected": "100",
+    "returned": [
+     "100",
+     "209",
+     "205",
+     "135",
+     "200",
+     "173",
+     "181",
+     "127"
+    ],
+    "rank": 1
+   },
+   {
+    "id": "d20",
+    "kind": "direct",
+    "expected": "300",
+    "returned": [
+     "300",
+     "292",
+     "297",
+     "295",
+     "148",
+     "147",
+     "219",
+     "294"
+    ],
+    "rank": 1
+   },
+   {
+    "id": "p01",
+    "kind": "paraphrase",
+    "expected": "93",
+    "returned": [
+     "93",
+     "92",
+     "87",
+     "89",
+     "103",
+     "84",
+     "83",
+     "88"
+    ],
+    "rank": 1
+   },
+   {
+    "id": "p02",
+    "kind": "paraphrase",
+    "expected": "87",
+    "returned": [
+     "87",
+     "93",
+     "84",
+     "83",
+     "89",
+     "86",
+     "88",
+     "124"
+    ],
+    "rank": 1
+   },
+   {
+    "id": "p03",
+    "kind": "paraphrase",
+    "expected": "86",
+    "returned": [
+     "93",
+     "87",
+     "86",
+     "94",
+     "83",
+     "155",
+     "89",
+     "159"
+    ],
+    "rank": 3
+   },
+   {
+    "id": "p04",
+    "kind": "paraphrase",
+    "expected": "95",
+    "returned": [
+     "95",
+     "302",
+     "131",
+     "93",
+     "173",
+     "94",
+     "87",
+     "88"
+    ],
+    "rank": 1
+   },
+   {
+    "id": "p05",
+    "kind": "paraphrase",
+    "expected": "294",
+    "returned": [
+     "292",
+     "300",
+     "295",
+     "297",
+     "219",
+     "97",
+     "294",
+     "15"
+    ],
+    "rank": 7
+   },
+   {
+    "id": "p06",
+    "kind": "paraphrase",
+    "expected": "297",
+    "returned": [
+     "134",
+     "222",
+     "297",
+     "173",
+     "294",
+     "40",
+     "299",
+     "300"
+    ],
+    "rank": 3
+   },
+   {
+    "id": "p07",
+    "kind": "paraphrase",
+    "expected": "298",
+    "returned": [
+     "298",
+     "302",
+     "299",
+     "224",
+     "294",
+     "200",
+     "93",
+     "292"
+    ],
+    "rank": 1
+   },
+   {
+    "id": "p08",
+    "kind": "paraphrase",
+    "expected": "137",
+    "returned": [
+     "12",
+     "143",
+     "93",
+     "137",
+     "158",
+     "59",
+     "89",
+     "144"
+    ],
+    "rank": 4
+   },
+   {
+    "id": "p09",
+    "kind": "paraphrase",
+    "expected": "85",
+    "returned": [
+     "83",
+     "87",
+     "84",
+     "124",
+     "93",
+     "85",
+     "199",
+     "173"
+    ],
+    "rank": 6
+   },
+   {
+    "id": "p10",
+    "kind": "paraphrase",
+    "expected": "91",
+    "returned": [
+     "93",
+     "92",
+     "83",
+     "87",
+     "91",
+     "89",
+     "88",
+     "84"
+    ],
+    "rank": 5
+   },
+   {
+    "id": "p11",
+    "kind": "paraphrase",
+    "expected": "302",
+    "returned": [
+     "302",
+     "298",
+     "174",
+     "260",
+     "95",
+     "224",
+     "200",
+     "299"
+    ],
+    "rank": 1
+   },
+   {
+    "id": "p12",
+    "kind": "paraphrase",
+    "expected": "296",
+    "returned": [
+     "58",
+     "14",
+     "296",
+     "295",
+     "33",
+     "157",
+     "294",
+     "264"
+    ],
+    "rank": 3
+   },
+   {
+    "id": "p13",
+    "kind": "paraphrase",
+    "expected": "102",
+    "returned": [
+     "97",
+     "106",
+     "219",
+     "102",
+     "112",
+     "173",
+     "117",
+     "15"
+    ],
+    "rank": 4
+   },
+   {
+    "id": "p14",
+    "kind": "paraphrase",
+    "expected": "113",
+    "returned": [
+     "114",
+     "117",
+     "199",
+     "112",
+     "92",
+     "307",
+     "115",
+     "113"
+    ],
+    "rank": 8
+   },
+   {
+    "id": "p15",
+    "kind": "paraphrase",
+    "expected": "100",
+    "returned": [
+     "85",
+     "298",
+     "112",
+     "173",
+     "96",
+     "222",
+     "146",
+     "302"
+    ],
+    "rank": null
+   },
+   {
+    "id": "p16",
+    "kind": "paraphrase",
+    "expected": "300",
+    "returned": [
+     "300",
+     "297",
+     "295",
+     "219",
+     "34",
+     "148",
+     "147",
+     "128"
+    ],
+    "rank": 1
+   },
+   {
+    "id": "p17",
+    "kind": "paraphrase",
+    "expected": "134",
+    "returned": [
+     "130",
+     "219",
+     "134",
+     "135",
+     "128",
+     "15",
+     "133",
+     "97"
+    ],
+    "rank": 3
+   },
+   {
+    "id": "p18",
+    "kind": "paraphrase",
+    "expected": "131",
+    "returned": [
+     "131",
+     "219",
+     "158",
+     "258",
+     "135",
+     "292",
+     "128",
+     "309"
+    ],
+    "rank": 1
+   },
+   {
+    "id": "p19",
+    "kind": "paraphrase",
+    "expected": "254",
+    "returned": [
+     "219",
+     "292",
+     "259",
+     "254",
+     "278",
+     "255",
+     "251",
+     "290"
+    ],
+    "rank": 4
+   },
+   {
+    "id": "p20",
+    "kind": "paraphrase",
+    "expected": "278",
+    "returned": [
+     "278",
+     "279",
+     "268",
+     "240",
+     "280",
+     "281",
+     "269",
+     "292"
+    ],
+    "rank": 1
+   },
+   {
+    "id": "t01",
+    "kind": "trap",
+    "expected": null,
+    "returned": [
+     "28",
+     "210",
+     "71",
+     "222",
+     "124",
+     "52",
+     "40",
+     "216"
+    ],
+    "rank": null
+   },
+   {
+    "id": "t02",
+    "kind": "trap",
+    "expected": null,
+    "returned": [
+     "131",
+     "95",
+     "94",
+     "91",
+     "83",
+     "93",
+     "158",
+     "302"
+    ],
+    "rank": null
+   },
+   {
+    "id": "t03",
+    "kind": "trap",
+    "expected": null,
+    "returned": [
+     "173",
+     "298",
+     "302",
+     "103",
+     "131",
+     "90",
+     "93",
+     "299"
+    ],
+    "rank": null
+   },
+   {
+    "id": "t04",
+    "kind": "trap",
+    "expected": null,
+    "returned": [
+     "189",
+     "173",
+     "141",
+     "183",
+     "199",
+     "184",
+     "302",
+     "182"
+    ],
+    "rank": null
+   },
+   {
+    "id": "t05",
+    "kind": "trap",
+    "expected": null,
+    "returned": [
+     "124",
+     "141",
+     "99",
+     "122",
+     "142",
+     "61",
+     "127",
+     "103"
+    ],
+    "rank": null
+   },
+   {
+    "id": "t06",
+    "kind": "trap",
+    "expected": null,
+    "returned": [
+     "211",
+     "128",
+     "15",
+     "237",
+     "219",
+     "150",
+     "33",
+     "97"
+    ],
+    "rank": null
+   },
+   {
+    "id": "t07",
+    "kind": "trap",
+    "expected": null,
+    "returned": [
+     "224",
+     "229",
+     "242",
+     "246",
+     "247",
+     "237",
+     "248",
+     "278"
+    ],
+    "rank": null
+   },
+   {
+    "id": "t08",
+    "kind": "trap",
+    "expected": null,
+    "returned": [
+     "131",
+     "158",
+     "130",
+     "95",
+     "91",
+     "83",
+     "93",
+     "309"
+    ],
+    "rank": null
+   },
+   {
+    "id": "t09",
+    "kind": "trap",
+    "expected": null,
+    "returned": [
+     "80",
+     "106",
+     "167",
+     "219",
+     "15",
+     "156",
+     "97",
+     "153"
+    ],
+    "rank": null
+   },
+   {
+    "id": "t10",
+    "kind": "trap",
+    "expected": null,
+    "returned": [
+     "39",
+     "303",
+     "77",
+     "304",
+     "213",
+     "206",
+     "287",
+     "250"
+    ],
+    "rank": null
+   }
+  ]
+ },
+ "answers": {
+  "metrics": {
+   "citation_presence": 0.333,
+   "gold_article_cited": 0.333,
+   "false_refusals": 0,
+   "trap_refusal_rate": 1.0,
+   "request_errors": 44
+  },
+  "per_case": [
+   {
+    "id": "d01",
+    "kind": "direct",
+    "refused": false,
+    "cited": [],
+    "gold_cited": false,
+    "answer_preview": "For work performed beyond eight (8) hours a day, an employee is paid an additional compensation equivalent to their regular wage plus at least twenty-five percent"
+   },
+   {
+    "id": "d02",
+    "kind": "direct",
+    "refused": false,
+    "cited": [],
+    "gold_cited": false,
+    "answer_preview": "Every employee who has rendered at least one year of service is entitled to a yearly service incentive leave of five days with pay [Art. 95(a)]."
+   },
+   {
+    "id": "d03",
+    "kind": "direct",
+    "refused": false,
+    "cited": [
+     "86"
+    ],
+    "gold_cited": true,
+    "answer_preview": "Every employee shall be paid a night shift differential of not less than ten percent (10%) of their regular wage for each hour of work performed between ten o'clock in the evening and six o'clock in t"
+   },
+   {
+    "id": "d04",
+    "kind": "direct",
+    "error": 429
+   },
+   {
+    "id": "d05",
+    "kind": "direct",
+    "error": 429
+   },
+   {
+    "id": "d06",
+    "kind": "direct",
+    "error": 429
+   },
+   {
+    "id": "d07",
+    "kind": "direct",
+    "error": 429
+   },
+   {
+    "id": "d08",
+    "kind": "direct",
+    "error": 429
+   },
+   {
+    "id": "d09",
+    "kind": "direct",
+    "error": 429
+   },
+   {
+    "id": "d10",
+    "kind": "direct",
+    "error": 429
+   },
+   {
+    "id": "d11",
+    "kind": "direct",
+    "error": 429
+   },
+   {
+    "id": "d12",
+    "kind": "direct",
+    "error": 429
+   },
+   {
+    "id": "d13",
+    "kind": "direct",
+    "error": 429
+   },
+   {
+    "id": "d14",
+    "kind": "direct",
+    "error": 429
+   },
+   {
+    "id": "d15",
+    "kind": "direct",
+    "error": 429
+   },
+   {
+    "id": "d16",
+    "kind": "direct",
+    "error": 429
+   },
+   {
+    "id": "d17",
+    "kind": "direct",
+    "error": 429
+   },
+   {
+    "id": "d18",
+    "kind": "direct",
+    "error": 429
+   },
+   {
+    "id": "d19",
+    "kind": "direct",
+    "error": 429
+   },
+   {
+    "id": "d20",
+    "kind": "direct",
+    "error": 429
+   },
+   {
+    "id": "p01",
+    "kind": "paraphrase",
+    "error": 429
+   },
+   {
+    "id": "p02",
+    "kind": "paraphrase",
+    "error": 429
+   },
+   {
+    "id": "p03",
+    "kind": "paraphrase",
+    "error": 429
+   },
+   {
+    "id": "p04",
+    "kind": "paraphrase",
+    "error": 429
+   },
+   {
+    "id": "p05",
+    "kind": "paraphrase",
+    "error": 429
+   },
+   {
+    "id": "p06",
+    "kind": "paraphrase",
+    "error": 429
+   },
+   {
+    "id": "p07",
+    "kind": "paraphrase",
+    "error": 429
+   },
+   {
+    "id": "p08",
+    "kind": "paraphrase",
+    "error": 429
+   },
+   {
+    "id": "p09",
+    "kind": "paraphrase",
+    "error": 429
+   },
+   {
+    "id": "p10",
+    "kind": "paraphrase",
+    "error": 429
+   },
+   {
+    "id": "p11",
+    "kind": "paraphrase",
+    "error": 429
+   },
+   {
+    "id": "p12",
+    "kind": "paraphrase",
+    "error": 429
+   },
+   {
+    "id": "p13",
+    "kind": "paraphrase",
+    "error": 429
+   },
+   {
+    "id": "p14",
+    "kind": "paraphrase",
+    "error": 429
+   },
+   {
+    "id": "p15",
+    "kind": "paraphrase",
+    "error": 429
+   },
+   {
+    "id": "p16",
+    "kind": "paraphrase",
+    "error": 429
+   },
+   {
+    "id": "p17",
+    "kind": "paraphrase",
+    "error": 429
+   },
+   {
+    "id": "p18",
+    "kind": "paraphrase",
+    "error": 429
+   },
+   {
+    "id": "p19",
+    "kind": "paraphrase",
+    "error": 429
+   },
+   {
+    "id": "p20",
+    "kind": "paraphrase",
+    "error": 429
+   },
+   {
+    "id": "t01",
+    "kind": "trap",
+    "error": 429
+   },
+   {
+    "id": "t02",
+    "kind": "trap",
+    "error": 429
+   },
+   {
+    "id": "t03",
+    "kind": "trap",
+    "refused": true,
+    "cited": [],
+    "gold_cited": null,
+    "answer_preview": "The Labor Code excerpts retrieved don't cover this \u2014 try rephrasing, or ask about hours of work, wages, leave, or termination."
+   },
+   {
+    "id": "t04",
+    "kind": "trap",
+    "refused": true,
+    "cited": [],
+    "gold_cited": null,
+    "answer_preview": "The Labor Code excerpts retrieved don't cover this \u2014 try rephrasing, or ask about hours of work, wages, leave, or termination."
+   },
+   {
+    "id": "t05",
+    "kind": "trap",
+    "refused": true,
+    "cited": [],
+    "gold_cited": null,
+    "answer_preview": "The Labor Code excerpts retrieved don't cover this \u2014 try rephrasing, or ask about hours of work, wages, leave, or termination."
+   },
+   {
+    "id": "t06",
+    "kind": "trap",
+    "error": 429
+   },
+   {
+    "id": "t07",
+    "kind": "trap",
+    "error": 429
+   },
+   {
+    "id": "t08",
+    "kind": "trap",
+    "error": 429
+   },
+   {
+    "id": "t09",
+    "kind": "trap",
+    "error": 429
+   },
+   {
+    "id": "t10",
+    "kind": "trap",
+    "error": 429
+   }
+  ]
+ }
+}

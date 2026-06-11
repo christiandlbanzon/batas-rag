@@ -1,7 +1,6 @@
 /** Public site constants (safe for the client). */
 
-// TODO(owner): point at the public repo once pushed to GitHub.
-export const REPO_URL = "https://github.com/your-username/batas-rag";
+export const REPO_URL = "https://github.com/christiandlbanzon/batas-rag";
 
 export const EXAMPLE_QUESTIONS = [
   "How is overtime pay computed?",
