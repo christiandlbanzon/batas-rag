@@ -10,7 +10,7 @@ Runs entirely on free tiers: **$0/month**.
 <!-- TODO(owner): record a 60–90s GIF of the demo and embed it here -->
 <!-- ![demo](docs/demo.gif) -->
 
-**Live demo:** _pending first Vercel deploy — see [Deploying](#deploying)_
+**Live demo:** **[batas-rag.vercel.app](https://batas-rag.vercel.app)**
 
 > Educational demo — **not legal advice**.
 
